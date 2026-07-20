@@ -184,6 +184,73 @@ queries/
 > Sempre em minúsculo, palavras separadas por hífen, sem acento.
 
 ---
-
-*Última atualização: Aula 25 — SELECT, WHERE, ORDER BY, LIMIT*  
-*Próxima atualização prevista: Aula 32 — exportando evidências do DBeaver*
+ 
+## 🔄 Trabalhando com Transactions no DBeaver
+ 
+> **Atenção:** por padrão o DBeaver usa autocommit — cada query é confirmada automaticamente. Para usar BEGIN/ROLLBACK/COMMIT corretamente, você precisa desabilitar o autocommit primeiro.
+ 
+### Passo 1 — Desabilitar o autocommit
+ 
+Procure na barra de ferramentas do editor SQL:
+ 
+```
+🔄 Auto-commit  ← clica para desabilitar
+```
+ 
+Ou pelo menu: **SQL Editor → Auto-commit** → desabilita.
+ 
+Quando desabilitado, a barra do editor muda de aparência — confirme antes de continuar.
+ 
+> ⚠️ Com autocommit **ligado**, o ROLLBACK não funciona — o INSERT já foi confirmado antes de você rodar o ROLLBACK.
+ 
+---
+ 
+### Passo 2 — Rodar bloco por bloco
+ 
+Nunca selecione tudo e rode com `Ctrl + Shift + Enter` — o DBeaver executa tudo junto e perde o efeito visual da transaction.
+ 
+**O jeito certo: cursor em cada comando + `Ctrl + Enter`**
+ 
+```sql
+-- 1. cursor aqui → Ctrl+Enter
+BEGIN;
+ 
+-- 2. cursor aqui → Ctrl+Enter
+INSERT INTO categories (name, slug, is_active)
+VALUES ('Categoria Teste', 'cat-teste', true);
+ 
+-- 3. cursor aqui → Ctrl+Enter
+-- confirma que aparece (só você vê neste momento)
+SELECT id, name FROM categories
+WHERE slug = 'cat-teste';
+ 
+-- 4. cursor aqui → Ctrl+Enter
+ROLLBACK;
+ 
+-- 5. cursor aqui → Ctrl+Enter
+-- confirma que sumiu — deve retornar 0 linhas
+SELECT id, name FROM categories
+WHERE slug = 'cat-teste';
+```
+ 
+**O que você vai ver:**
+- Passo 3 → retorna 1 linha — INSERT funcionou dentro da transaction
+- Passo 5 → retorna 0 linhas — ROLLBACK desfez tudo
+---
+ 
+### Passo 3 — Reabilitar o autocommit depois
+ 
+Sempre reabilite o autocommit ao terminar os exercícios de transaction.
+ 
+Se deixar desabilitado, todo INSERT da próxima aula ficará pendente até você rodar COMMIT ou ROLLBACK manualmente — e você pode perder dados sem perceber.
+ 
+---
+ 
+### Resumo rápido
+ 
+| Situação | Autocommit | Comportamento |
+|---|---|---|
+| Aulas normais (SELECT, INSERT, UPDATE) | ✅ Ligado | Cada query confirma automaticamente |
+| Aulas de Transaction (BEGIN/ROLLBACK) | ❌ Desligado | Você controla quando confirmar |
+ 
+*Última atualização: Aula 41 — Transações: BEGIN, COMMIT e ROLLBACK*
