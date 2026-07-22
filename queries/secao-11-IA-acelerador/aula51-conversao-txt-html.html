@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Relatório de Validação - Categorias</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        margin: 20px;
+    }
+
+    h1 {
+        color: #2c3e50;
+    }
+
+    .summary {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .summary span {
+        display: inline-block;
+        margin-right: 20px;
+        font-weight: bold;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    th {
+        background: #34495e;
+        color: white;
+        padding: 12px;
+        text-align: left;
+    }
+
+    td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background: #f1f1f1;
+    }
+
+    .PASSED {
+        color: #27ae60;
+        font-weight: bold;
+    }
+
+    .FAILED {
+        color: #e74c3c;
+        font-weight: bold;
+    }
+
+    .NA {
+        color: #7f8c8d;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>📊 Relatório de Validação - QA (Categorias)</h1>
+
+<div class="summary">
+    <span>✔️ Testes PASSED: 6</span>
+    <span>❌ Testes FAILED: 5</span>
+    <span>⚠️ Não Aplicável (N/A): 4</span>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Teste</th>
+            <th>Status</th>
+            <th>Falhas</th>
+            <th>IDs com Erro</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>C26 - Nome da Categoria Obrigatório</td>
+            <td class="FAILED">FAILED</td>
+            <td>10</td>
+            <td>91, 701, 702, 704, 706, 708, 710, 711, 712, 713</td>
+        </tr>
+
+        <tr>
+            <td>C27 - Descrição da Categoria Obrigatória</td>
+            <td class="PASSED">PASSED</td>
+            <td>0</td>
+            <td>-</td>
+        </tr>
+
+        <tr>
+            <td>C28 - Nome da Categoria Muito Curto</td>
+            <td class="FAILED">FAILED</td>
+            <td>30</td>
+            <td>91, 311, 324, 325, 577...</td>
+        </tr>
+
+        <tr>
+            <td>C29 - Nome da Categoria Muito Longo</td>
+            <td class="PASSED">PASSED</td>
+            <td>0</td>
+            <td>-</td>
+        </tr>
+
+        <tr>
+            <td>C30 - Nome da Categoria Duplicado</td>
+            <td class="FAILED">FAILED</td>
+            <td>18</td>
+            <td>12, 13, 91, 148...</td>
+        </tr>
+
+        <tr>
+            <td>C31 - Descrição Muito Longa (>500)</td>
+            <td class="PASSED">PASSED</td>
+            <td>0</td>
+            <td>-</td>
+        </tr>
+
+        <tr>
+            <td>C32 - Cadastro válido (sanidade geral)</td>
+            <td class="PASSED">PASSED</td>
+            <td>311</td>
+            <td>Lista extensa...</td>
+        </tr>
+
+        <tr>
+            <td>API - Campos obrigatórios ausentes</td>
+            <td class="FAILED">FAILED</td>
+            <td>10</td>
+            <td>91, 701, 702...</td>
+        </tr>
+
+        <tr>
+            <td>API - Descrição muito longa (>200)</td>
+            <td class="PASSED">PASSED</td>
+            <td>0</td>
+            <td>-</td>
+        </tr>
+
+        <tr>
+            <td>API - Nome fora do limite (3 a 100)</td>
+            <td class="FAILED">FAILED</td>
+            <td>30</td>
+            <td>91, 311, 324...</td>
+        </tr>
+
+        <tr>
+            <td>GET - ID inválido</td>
+            <td class="NA">N/A</td>
+            <td>0</td>
+            <td>-</td>
+        </tr>
+
+        <tr>
+            <td>GET - Categoria não encontrada</td>
+            <td class="NA">N/A</td>
+            <td>0</td>
+            <td>-</td>
+        </tr>
+
+        <tr>
+            <td>DELETE - Categoria com produtos vinculados</td>
+            <td class="NA">N/A</td>
+            <td>0</td>
+            <td>-</td>
+        </tr>
+
+        <tr>
+            <td>DELETE - Erro de integridade referencial</td>
+            <td class="NA">N/A</td>
+            <td>0</td>
+            <td>-</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<br><br>
+
+<div class="summary">
+    <strong>📌 Observações QA:</strong>
+    <ul>
+        <li>Falhas críticas em validação de nome (obrigatoriedade e tamanho).</li>
+        <li>Duplicidade de categorias ainda não controlada corretamente.</li>
+        <li>Validações de API estão inconsistentes com regras de banco.</li>
+        <li>Endpoints GET e DELETE não foram validados via SQL.</li>
+    </ul>
+</div>
+
+</body>
+</html>
