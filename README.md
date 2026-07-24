@@ -24,7 +24,8 @@
 
 ## 📊 Relatórios ao Vivo
 
-> 🔗 [Relatório de Fornecedores](https://github.com/cursosgotasdetecnologia/sql-qa-professional/blob/main/queries/secao-11-IA-acelerador/index.html)
+> 🔗 [Relatório de Fornecedores](https://cursosgotasdetecnologia.github.io/sql-qa-professional/queries/secao-11-IA-acelerador/aula52-relatorio-fornecedores.html)
+> 
 
 ---
 
